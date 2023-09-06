@@ -46,6 +46,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "react-icons-kit": "^2.0.0",
     "styled-components": "^6.0.7"
   },
   "lint-staged": {
