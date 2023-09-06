@@ -1,9 +1,7 @@
-/* eslint-disable */
-
 import { useEffect, useReducer } from 'react';
 import { STATUS } from '../constants';
-import useCache from '../hooks/useCache';
 import { isEmptyArray } from '../utils';
+import { setToCacheStorage, getFromCacheStorage } from '../apis/cache';
 
 export default function useFetch(callback, endpoint, expireTime = 50000) {
   const [{ data, isLoading, error }, dispatch] = useReducer(useFetchReducer, {
@@ -11,19 +9,18 @@ export default function useFetch(callback, endpoint, expireTime = 50000) {
     error: null,
     data: null,
   });
-  const { cacheData, getCachedData } = useCache();
 
   const fetchData = async (callback, endpoint, expireTime = 50000) => {
     try {
       if (!(callback || endpoint)) return;
       dispatch({ type: STATUS.LOADING });
 
-      const cachedData = getCachedData(endpoint, expireTime);
+      const cachedData = await getFromCacheStorage(endpoint, expireTime);
       if (isEmptyArray(cachedData)) {
         console.info('calling api');
         const callbackData = await callback();
         dispatch({ type: STATUS.SUCCESS, data: callbackData });
-        cacheData(endpoint, callbackData, expireTime);
+        setToCacheStorage(endpoint, callbackData, expireTime);
       } else {
         dispatch({ type: STATUS.SUCCESS, data: cachedData });
       }
@@ -31,8 +28,6 @@ export default function useFetch(callback, endpoint, expireTime = 50000) {
       dispatch({ type: STATUS.ERROR, error });
     }
   };
-
-  //   dispatch({ type: STATUS.IDLE });
 
   useEffect(() => {
     fetchData(callback, endpoint, expireTime);
@@ -51,17 +46,15 @@ const useFetchReducer = (state, action) => {
       };
     case STATUS.LOADING:
       return {
-        ...state,
+        data: null,
         isLoading: true,
         error: null,
-        // data: null,
       };
     case STATUS.ERROR:
       return {
-        ...state,
+        data: null,
         isLoading: false,
         error: action.error,
-        // data: null,
       };
     case STATUS.SUCCESS:
       return {
