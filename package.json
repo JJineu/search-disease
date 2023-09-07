@@ -16,7 +16,7 @@
     "start": "react-scripts start",
     "dev-vercel": "concurrently npm:watch-*",
     "watch-dev": "vite",
-    "watch-vercel": "vercel dev --listen 2999",
+    "watch-vercel": "vercel dev --listen 4000",
     "server": "json-server --watch db.json --port 4000",
     "dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
