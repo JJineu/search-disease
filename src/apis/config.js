@@ -9,7 +9,7 @@ class HttpClient {
   }
 }
 
-export const httpClient = new HttpClient('http://localhost:4000/');
+export const httpClient = new HttpClient(process.env.REACT_APP_BASEURL);
 
 class CacheStorage {
   constructor(KEY) {
