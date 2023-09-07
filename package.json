@@ -14,14 +14,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev-vercel": "concurrently npm:watch-*",
-    "watch-dev": "vite",
-    "watch-vercel": "vercel dev --listen 4000",
     "server": "json-server --watch db.json --port 4000",
     "dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "postinstall": "husky install"
   },
   "eslintConfig": {
@@ -50,8 +45,7 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "react-icons-kit": "^2.0.0",
-    "styled-components": "^6.0.7",
-    "vercel": "^32.1.0"
+    "styled-components": "^6.0.7"
   },
   "lint-staged": {
     "*.{js,jsx}": [
