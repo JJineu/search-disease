@@ -1,36 +1,83 @@
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+  font-family: 'SpoqaHanSansNeo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
     format('woff');
-  font-weight: 400;
+  font-weight: normal;
   font-style: normal;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family:
-    'Pretendard',
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'SpoqaHanSansNeo';
+  src: url('https://cdn.jsdelivr.net/npm/@noonnu/spoqahansansneo-bold@0.0.1/SpoqaHanSansNeo-Bold.woff')
+    format('woff');
+  font-weight: bold;
+  font-style: normal;
 }
 
-body {
-  padding: 20px;
-  background-color: #c2e9f4;
+*{
+  box-sizing: border-box;
+}
+:root{
+  --black: #000;
+  --white: #fff;
+  --gray: #A7AFB7;
+  --lightGray: #EDEDED;
+  --deepGray: #6A737B;
+  --skyBlue: #C2E9F4;
+  --blue: #007BE9;
+  font-size: 16px;
+}
+body{
+  background-color: var(--skyBlue);
+  margin: 0;
+  font-family: 'SpoqaHanSansNeo';
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+ul,li{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+img{
+  width: 100%;
+  vertical-align: middle;
+}
+svg{
+  vertical-align: middle;
+}
+input{
+  background: unset;
+  border: unset;	
+  font: inherit;
+}
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  font: inherit;
+}
+.a11y {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
 }

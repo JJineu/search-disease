@@ -4,3 +4,7 @@ export const STATUS = {
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
 };
+
+export const PATH = {
+  SICK: 'sick',
+};

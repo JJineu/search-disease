@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
-import { isEmptyArray, isKoreanWord, debounce } from '../utils';
+import { isEmptyArray, debounce } from '../utils';
+import { searchDisease } from '../apis/search';
+
 import styled, { css } from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { search } from 'react-icons-kit/fa/search';
 import { remove } from 'react-icons-kit/fa/remove';
-import { searchDisease } from '../apis/search';
 
 export default function SearchPage() {
   const { data, fetchData } = useFetch();
-  const [recommendWordList, setRecommendWordList] = useState([]); // { sickCd: string, sickNm: string }[]
+  /**
+   * @type {Array<{sickCd; string, sickNm: string}>}
+   */
+  const [recommendWordList, setRecommendWordList] = useState([]);
   const [searchHistory, setSearchHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [inputFocus, setInputFocus] = useState(false);
@@ -18,8 +22,8 @@ export default function SearchPage() {
   const debouncedChangeSearchWord = debounce((e) => {
     setInputValue(e.target.value);
     const searchWord = e.target.value.trim();
-    if (searchWord && isKoreanWord(searchWord)) {
-      fetchData(() => searchDisease(searchWord, '&_sort=s`ickCd&order=DESC&_limit=8'), searchWord);
+    if (searchWord) {
+      fetchData(() => searchDisease(searchWord), searchWord);
     }
   }, 1000);
 
@@ -47,6 +51,7 @@ export default function SearchPage() {
 
   const selectListItemByKeyArrow = (e) => {
     if (e.nativeEvent.isComposing) return;
+    // e.prevent.default();
 
     switch (e.key) {
       case 'ArrowDown': {
@@ -70,8 +75,7 @@ export default function SearchPage() {
   }, [data]);
 
   return (
-    <Container>
-      <Title>국내 모든 임상시험 검색하고~</Title>
+    <>
       <SearchContainer>
         <Icon icon={search} className='ic_search' />
         <SearchInput
@@ -123,16 +127,9 @@ export default function SearchPage() {
           {/* <Subtitle>추천 검색어로 검색해 보세요</Subtitle> */}
         </WordList>
       )}
-    </Container>
+    </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-`;
 
 const SearchContainer = styled.div`
   display: flex;
@@ -182,12 +179,6 @@ const SearchInput = styled.input`
   &:focus {
     border: 2px solid rgb(105, 130, 255);
   }
-`;
-
-const Title = styled.p`
-  font-size: xx-large;
-  font-weight: bold;
-  padding: 40px;
 `;
 
 const Subtitle = styled.p`

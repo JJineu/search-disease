@@ -1,3 +1,5 @@
+import { PATH } from '../constants';
+
 class HttpClient {
   constructor(baseURL) {
     this.baseURL = baseURL;
@@ -27,5 +29,4 @@ class CacheStorage {
   }
 }
 
-const KEY = 'disease';
-export const cacheStorage = new CacheStorage(KEY);
+export const cacheStorage = new CacheStorage(PATH.SICK);

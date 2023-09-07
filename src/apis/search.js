@@ -1,7 +1,7 @@
+import { PATH } from '../constants';
 import { httpClient } from './config';
 
-export const searchDisease = async (endpoint, options = '') => {
-  const response = await httpClient.fetch(`sick?q=${endpoint}${options}`);
-  const res = await response.json();
-  return res;
+export const searchDisease = async (keyword) => {
+  const response = await httpClient.fetch(`${PATH.SICK}?q=${keyword}`);
+  return await response.json();
 };

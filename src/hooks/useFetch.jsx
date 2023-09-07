@@ -10,15 +10,15 @@ export default function useFetch(callback, endpoint, expireTime = 50000) {
     data: null,
   });
 
-  const fetchData = async (callback, endpoint, expireTime = 50000) => {
+  const fetchData = async (callback, endpoint, expireTime = 5000) => {
     try {
       if (!(callback || endpoint)) return;
       dispatch({ type: STATUS.LOADING });
 
-      const cachedData = await getFromCacheStorage(endpoint, expireTime);
+      const cachedData = await getFromCacheStorage(endpoint);
       if (isEmptyArray(cachedData)) {
-        console.info('calling api');
         const callbackData = await callback();
+        console.info('calling api');
         dispatch({ type: STATUS.SUCCESS, data: callbackData });
         setToCacheStorage(endpoint, callbackData, expireTime);
       } else {
