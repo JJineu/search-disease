@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useDebounce from '../hooks/useDebounce';
 import useFetch from '../hooks/useFetch';
-import { isEmptyArray, isKoreanWord } from '../utils';
+import { isEmptyArray, isKoreanWord, debounce } from '../utils';
 import styled, { css } from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { search } from 'react-icons-kit/fa/search';
@@ -16,11 +15,11 @@ export default function SearchPage() {
   const [inputFocus, setInputFocus] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const debouncedChangeSearchWord = useDebounce((e) => {
+  const debouncedChangeSearchWord = debounce((e) => {
     setInputValue(e.target.value);
     const searchWord = e.target.value.trim();
     if (searchWord && isKoreanWord(searchWord)) {
-      fetchData(() => searchDisease(searchWord, '&_sort=s`ickCd&order=DESC&_limit=5'), searchWord);
+      fetchData(() => searchDisease(searchWord, '&_sort=s`ickCd&order=DESC&_limit=8'), searchWord);
     }
   }, 1000);
 
@@ -46,27 +45,22 @@ export default function SearchPage() {
     }
   };
 
-  const handleKeyArrow = (e) => {
-    if (!(e.key === 'ArrowDown' || e.key === 'ArrowUp')) return;
+  const selectListItemByKeyArrow = (e) => {
     if (e.nativeEvent.isComposing) return;
-    if (e.key === 'ArrowDown') {
-      const lastIndex = recommendWordList.length - 1;
-      if (selectedIndex === lastIndex) {
-        return setSelectedIndex(0);
-      }
-      if (selectedIndex < lastIndex) {
-        setSelectedIndex((prev) => prev + 1);
-      }
-    }
-    if (e.key === 'ArrowUp') {
-      if (e.nativeEvent.isComposing) return;
 
-      const lastIndex = recommendWordList.length - 1;
-      if (selectedIndex === 0) {
-        return setSelectedIndex(lastIndex);
-      } else {
-        setSelectedIndex((prev) => prev - 1);
+    switch (e.key) {
+      case 'ArrowDown': {
+        const lastIndex = recommendWordList.length - 1;
+        setSelectedIndex((prev) => (prev < lastIndex ? prev + 1 : 0));
+        break;
       }
+      case 'ArrowUp': {
+        const lastIndex = recommendWordList.length - 1;
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : lastIndex));
+        break;
+      }
+      default:
+        break;
     }
   };
 
@@ -80,17 +74,15 @@ export default function SearchPage() {
       <Title>국내 모든 임상시험 검색하고~</Title>
       <SearchContainer>
         <Icon icon={search} className='ic_search' />
-        <label>
-          <SearchInput
-            id='search-input'
-            type='text'
-            onChange={debouncedChangeSearchWord}
-            onFocus={() => setInputFocus(true)}
-            onBlur={() => setInputFocus(false)}
-            onKeyDown={handleKeyArrow}
-            placeholder='질환명을 입력해 주세요.'
-          />
-        </label>
+        <SearchInput
+          id='search-input'
+          type='text'
+          onChange={debouncedChangeSearchWord}
+          onFocus={() => setInputFocus(true)}
+          onBlur={() => setInputFocus(false)}
+          onKeyDown={selectListItemByKeyArrow}
+          placeholder='질환명을 입력해 주세요.'
+        />
         {inputValue && <Icon className='ic_remove' icon={remove} onClick={removeSearchWord} />}
         <Icon className='ic_search2' icon={search} onClick={() => addSearchHistory(inputValue)} />
       </SearchContainer>
@@ -123,7 +115,7 @@ export default function SearchPage() {
         <WordList>
           <Subtitle>최근 검색어</Subtitle>
           {searchHistory.map((result, idx) => (
-            <WordItem key={idx}>
+            <WordItem key={idx} isSelected={idx === selectedIndex} isInputFocus={inputFocus}>
               <Icon icon={search} className='ic_search' />
               {result}
             </WordItem>

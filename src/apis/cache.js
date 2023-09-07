@@ -1,14 +1,8 @@
 import { cacheStorage } from './config';
 
 export async function setToCacheStorage(searchWord, response, expireTime) {
-  const init = {
-    headers: {
-      'Content-Type': 'application/json, application/json; charset=utf-8',
-      'content-length': '2',
-    },
-  };
   const res = { expireTime, data: response, timestamp: new Date().getTime() };
-  const clonedResponse = new Response(JSON.stringify(res), init);
+  const clonedResponse = new Response(JSON.stringify(res));
   await cacheStorage.put(searchWord, clonedResponse);
 
   return;
