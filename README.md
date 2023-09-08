@@ -33,12 +33,15 @@
 - 디바운스
 
 <br>
-<br>
-<img src='https://github.com/JJineu/search-disease/assets/96639305/38c1b35c-4be4-4274-89ad-8b511caf0d78'>
 
 <br>
-<br>
+
 # 🧑🏻‍💻 프로젝트 정보
+<br>
+<p align='center'>
+<img src='https://github.com/JJineu/search-disease/assets/96639305/aca210f7-145f-4af9-b5bb-e55afb5ce72c'>
+</p>
+<br>
 
 ### 실행 방법
 
