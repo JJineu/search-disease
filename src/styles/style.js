@@ -1,38 +1,25 @@
-@font-face {
-  font-family: 'SpoqaHanSansNeo';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+import { createGlobalStyle } from 'styled-components';
 
-@font-face {
-  font-family: 'SpoqaHanSansNeo';
-  src: url('https://cdn.jsdelivr.net/npm/@noonnu/spoqahansansneo-bold@0.0.1/SpoqaHanSansNeo-Bold.woff')
-    format('woff');
-  font-weight: bold;
-  font-style: normal;
-}
-
-*{
+const GlobalStyle = createGlobalStyle`
+* {
   box-sizing: border-box;
 }
-:root{
+:root {
   --black: #000;
   --white: #fff;
-  --gray: #A7AFB7;
-  --lightGray: #EDEDED;
-  --deepGray: #6A737B;
-  --skyBlue: #C2E9F4;
-  --blue: #007BE9;
+  --gray: #808080;
+  --lightGray: #ededed;
+  --blue: #435fff;
+  --skyBlue: #c2e9f4;
+  --grayBlue: #afd2e1de;
   font-size: 16px;
 }
-body{
+body {
   background-color: var(--skyBlue);
   margin: 0;
   font-family: 'SpoqaHanSansNeo';
 }
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
@@ -44,21 +31,22 @@ button {
   color: inherit;
   cursor: pointer;
 }
-ul,li{
+ul,
+li {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-img{
+img {
   width: 100%;
   vertical-align: middle;
 }
-svg{
+svg {
   vertical-align: middle;
 }
-input{
+input {
   background: unset;
-  border: unset;	
+  border: unset;
   font: inherit;
 }
 textarea {
@@ -81,3 +69,6 @@ textarea {
   padding: 0;
   position: absolute;
 }
+`;
+
+export default GlobalStyle;

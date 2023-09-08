@@ -1,3 +1,4 @@
+import { CACHE } from '../constants';
 import { cacheStorage } from './config';
 
 /**
@@ -5,7 +6,7 @@ import { cacheStorage } from './config';
  * @param {Array} data
  * @param {number} expireTime
  */
-export async function setToCacheStorage(keyword, data, expireTime) {
+export async function setToCacheStorage(keyword, data, expireTime = CACHE.DEFAULT_EXPIRE_TIME) {
   const expirationTime = new Date().getTime() + expireTime;
   const res = { data, expirationTime };
   const clonedResponse = new Response(JSON.stringify(res));
@@ -29,7 +30,6 @@ export async function getFromCacheStorage(keyword) {
       return [];
     }
     const res = await response.json();
-    console.log(res);
 
     if (res.expirationTime > new Date().getTime()) {
       return res.data;

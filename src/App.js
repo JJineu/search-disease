@@ -2,17 +2,23 @@ import React from 'react';
 
 import SearchPage from './pages/SearchPage';
 
-import './style.css';
+import GlobalStyle from './styles/style.js';
 import styled from 'styled-components';
+import { SearchProvider } from './context/searchContext';
 
 function App() {
   return (
-    <Container>
-      <Title>
-        국내 모든 임상시험을 검색하고 <br /> <br /> 온라인으로 참여하기
-      </Title>
-      <SearchPage />
-    </Container>
+    <>
+      <GlobalStyle />
+      <Container>
+        <Title>
+          국내 모든 임상시험을 검색하고 <br /> <br /> 온라인으로 참여하기
+        </Title>
+        <SearchProvider>
+          <SearchPage />
+        </SearchProvider>
+      </Container>
+    </>
   );
 }
 
