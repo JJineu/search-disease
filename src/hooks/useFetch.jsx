@@ -1,16 +1,16 @@
 import { useEffect, useReducer } from 'react';
-import { STATUS } from '../constants';
+import { STATUS, CACHE } from '../constants';
 import { isEmptyArray } from '../utils';
 import { setToCacheStorage, getFromCacheStorage } from '../apis/cache';
 
-export default function useFetch(callback, endpoint, expireTime = 50000) {
+export default function useFetch(callback, endpoint, expireTime = CACHE.DEFAULT_EXPIRE_TIME) {
   const [{ data, isLoading, error }, dispatch] = useReducer(useFetchReducer, {
     isLoading: false,
     error: null,
     data: null,
   });
 
-  const fetchData = async (callback, endpoint, expireTime = 5000) => {
+  const fetchData = async (callback, endpoint, expireTime = CACHE.DEFAULT_EXPIRE_TIME) => {
     try {
       if (!(callback || endpoint)) return;
       dispatch({ type: STATUS.LOADING });
