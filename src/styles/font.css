@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'SpoqaHanSansNeo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpoqaHanSansNeo';
+  src: url('https://cdn.jsdelivr.net/npm/@noonnu/spoqahansansneo-bold@0.0.1/SpoqaHanSansNeo-Bold.woff')
+    format('woff');
+  font-weight: bold;
+  font-style: normal;
+}

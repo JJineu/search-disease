@@ -17,8 +17,6 @@
     "server": "json-server --watch db.json --port 4000",
     "dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "postinstall": "husky install"
   },
   "eslintConfig": {
@@ -45,7 +43,9 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "react-icons-kit": "^2.0.0",
+    "styled-components": "^6.0.7"
   },
   "lint-staged": {
     "*.{js,jsx}": [
