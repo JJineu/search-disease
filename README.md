@@ -53,7 +53,7 @@
   // 실행하기 위해서는 Node.js가 설치된 환경이 필요합니다.
   git clone https://github.com/JJineu/search-disease.git
   npm install
-  npm start
+  npm run dev
   ```
 
   ```jsx
