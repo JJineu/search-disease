@@ -1,3 +1,5 @@
+import { PATH } from '../constants';
+
 class HttpClient {
   constructor(baseURL) {
     this.baseURL = baseURL;
@@ -9,7 +11,7 @@ class HttpClient {
   }
 }
 
-export const httpClient = new HttpClient('http://localhost:4000/');
+export const httpClient = new HttpClient(process.env.REACT_APP_BASEURL);
 
 class CacheStorage {
   constructor(KEY) {
@@ -27,5 +29,4 @@ class CacheStorage {
   }
 }
 
-const KEY = 'disease';
-export const cacheStorage = new CacheStorage(KEY);
+export const cacheStorage = new CacheStorage(PATH.SICK);
